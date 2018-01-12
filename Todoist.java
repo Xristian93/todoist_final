@@ -55,12 +55,51 @@ public class Todoist
     {
         tareas.get(indiceTarea).setTareaCompletada();
     }
-    
+
     /**
-     * Cambiar prioridad a la tarea indicada por parametro.
+     * Cambiar prioridad a la tarea indicada por parametro. Si el usuario indica una posicion no válida, el metodo no
+     * hace nada.
      */
     public void cambiarPrioridad(int indiceTarea, int nuevaPrioridad)
     {
-        tareas.get(indiceTarea).setPrioridad(nuevaPrioridad);
+        if (indiceTarea >=0 && indiceTarea < tareas.size()){
+            tareas.get(indiceTarea).setPrioridad(nuevaPrioridad);
+        }
+    }
+
+    /**
+     * Imprimir datos tareas con porcentajes.
+     */
+    public void mostrarDatos()
+    {
+        int numTareasCompletadas = 0;
+        for (Tarea tarea : tareas) {
+            if (tarea.getTareaCompletada()){
+                numTareasCompletadas++;
+            }
+        }
+        int numTareasSinCompletar = tareas.size() - numTareasCompletadas;
+        System.out.println("Numero de tareas completadas: " + numTareasCompletadas +
+            " Porcentaje de tareas completadas: " + numTareasCompletadas*100/tareas.size() + "%");
+        System.out.println("Numero de tareas sin completar: " + numTareasSinCompletar +
+            " Porcentaje de tareas sin completar: " + numTareasSinCompletar*100/tareas.size() + "%");
+        System.out.println("Numero de tareas totales: " + tareas.size());
+    }
+
+    /**
+     * Imprime todos los datos de la tarea con mayor prioridad. Si hay empate,
+     * imprime la última encontrada.
+     */
+    public void imprimirMayorPrioridad()
+    {
+        if (tareas.size() > 0){
+            Tarea tareaPrioridadMaxima = tareas.get(0);
+            for (Tarea tareaActual : tareas){
+                if(tareaActual.getPrioridad() >= tareaPrioridadMaxima.getPrioridad()){
+                    tareaPrioridadMaxima = tareaActual;
+                }
+            }
+            System.out.println(tareaPrioridadMaxima.getDatosTarea());
+        }
     }
 }

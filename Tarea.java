@@ -32,12 +32,12 @@ public class Tarea
      */
     public String getDatosTarea()
     {
-        String aDevolver = contenido;
+        String aDevolver = contenido + " Prioridad: " + prioridad;
         if (completada) {
-            aDevolver = "[X] " + aDevolver + " Prioridad: " + prioridad;
+            aDevolver = "[X] " + aDevolver;
         }
         else {
-            aDevolver = "[ ] " + aDevolver + " Prioridad: " + prioridad;
+            aDevolver = "[ ] " + aDevolver;
         }
         return aDevolver; 
     }
@@ -67,7 +67,7 @@ public class Tarea
     }
     
     /**
-     * Metodo que cambia la prioridad de una tarea.
+     * Metodo que cambia la prioridad de una tarea. Si no es un valor legal la prioridad se queda como esta.
      */
     public void setPrioridad(int nuevaPrioridad)
     {
